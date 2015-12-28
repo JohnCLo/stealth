@@ -38,23 +38,30 @@ module.exports = function(app,io){
 		// When the client emits the 'load' event, reply with the 
 		// number of people in this chat room
 
+		// how many people are allowed in this room? needs to be passed by slack or selection
+		var max = 3
+
 		socket.on('load',function(data){
 
 			var room = findClientsSocket(io,data);
+
+			console.log(room.length)
 			if(room.length === 0 ) {
 
 				socket.emit('peopleinchat', {number: 0});
 			}
-			else if(room.length === 1) {
+			else if(room.length > 0 && room.length < max) {
 
 				socket.emit('peopleinchat', {
-					number: 1,
+					number: room.length,
 					user: room[0].username,
 					avatar: room[0].avatar,
-					id: data
+					id: data,
+					max: max
 				});
 			}
-			else if(room.length >= 2) {
+			// control how many people are in the room
+			else if(room.length >= max) {
 
 				chat.emit('tooMany', {boolean: true});
 			}
@@ -64,25 +71,31 @@ module.exports = function(app,io){
 		// and add them to the room
 		socket.on('login', function(data) {
 
+			var max = 3;
+			//console.log(data)
 			var room = findClientsSocket(io, data.id);
+			console.log(room.length)
 			// Only two people per room are allowed
-			if (room.length < 2) {
+			if (room.length < max) {			
 
 				// Use the socket object to store data. Each client gets
 				// their own unique socket object
 
 				socket.username = data.user;
 				socket.room = data.id;
-				socket.avatar = gravatar.url(data.avatar, {s: '140', r: 'x', d: 'mm'});
+				// based on avatar returned, get image
+				//socket.avatar = avatars[data.avatar]
+				socket.avatar = NaN;
+				// socket.avatar = gravatar.url(data.avatar, {s: '140', r: 'x', d: 'mm'});
 
-				// Tell the person what he should use for an avatar
-				socket.emit('img', socket.avatar);
+				// // Tell the person what he should use for an avatar
+				//socket.emit('img', 'hello');
 
 
 				// Add the client to the room
 				socket.join(data.id);
 
-				if (room.length == 1) {
+				if (room.length >= 1) {
 
 					var usernames = [],
 						avatars = [];
@@ -103,11 +116,14 @@ module.exports = function(app,io){
 						avatars: avatars
 					});
 				}
-			}
-			else {
+			} else {
 				socket.emit('tooMany', {boolean: true});
 			}
 		});
+
+		// socket.on('isTyping', function(){
+		// 	socket.emit('isTyping', {boolean: true})
+		// });
 
 		// Somebody left the chat
 		socket.on('disconnect', function() {
@@ -126,10 +142,9 @@ module.exports = function(app,io){
 			socket.leave(socket.room);
 		});
 
-
 		// Handle the sending of messages
 		socket.on('msg', function(data){
-
+			console.log(data)
 			// When the server receives a message, it sends it to the other person in the room.
 			socket.broadcast.to(socket.room).emit('receive', {msg: data.msg, user: data.user, img: data.img});
 		});

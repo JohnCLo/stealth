@@ -43,6 +43,9 @@ $(function(){
 		leftImage = $("#leftImage"),
 		noMessagesImage = $("#noMessagesImage");
 
+	var isTyping = $("#isTyping");
+
+	var profiles = ['Iron Man', 'Spider Man', 'Thor']
 
 	// on connection to server get the id of person's room
 	socket.on('connect', function(){
@@ -60,67 +63,23 @@ $(function(){
 
 		if(data.number === 0){
 
-			showMessage("connected");
+			//showMessage("connected");
 
-			loginForm.on('submit', function(e){
+			//showMessage("inviteSomebody");
+			showMessage("initializeChat");
+			// randomly select a profile
+			name = profiles[Math.floor(Math.random() * profiles.length)]+' '+Math.round((Math.random() * 1000000));
+			emial = Math.round((Math.random() * 1000000))
+			// call the server-side function 'login' and send user's parameters
+			socket.emit('login', {user: name, avatar: email, id: id});
 
-				e.preventDefault();
+		} else if(data.number > 0 && data.number <= data.max) {
+			showMessage("initializeChat");
+			name = profiles[Math.floor(Math.random() * profiles.length)]+' '+Math.round((Math.random() * 1000000))			// call the server-side function 'login' and send user's parameters
+			email = Math.round((Math.random() * 1000000))
+			socket.emit('login', {user: name +' '+Math.round((Math.random() * 1000000)), avatar: name, id: id});
 
-				name = $.trim(yourName.val());
-				
-				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
-					return;
-				}
-
-				email = yourEmail.val();
-
-				if(!isValid(email)) {
-					alert("Please enter a valid email!");
-				}
-				else {
-
-					showMessage("inviteSomebody");
-
-					// call the server-side function 'login' and send user's parameters
-					socket.emit('login', {user: name, avatar: email, id: id});
-				}
-			
-			});
-		}
-
-		else if(data.number === 1) {
-
-			showMessage("personinchat",data);
-
-			loginForm.on('submit', function(e){
-
-				e.preventDefault();
-
-				name = $.trim(hisName.val());
-
-				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
-					return;
-				}
-
-				if(name == data.user){
-					alert("There already is a \"" + name + "\" in this room!");
-					return;
-				}
-				email = hisEmail.val();
-
-				if(!isValid(email)){
-					alert("Wrong e-mail format!");
-				}
-				else {
-					socket.emit('login', {user: name, avatar: email, id: id});
-				}
-
-			});
-		}
-
-		else {
+		} else {
 			showMessage("tooManyPeople");
 		}
 
@@ -128,24 +87,10 @@ $(function(){
 
 	// Other useful 
 
-	socket.on('startChat', function(data){
-		console.log(data);
-		if(data.boolean && data.id == id) {
-
-			chats.empty();
-
-			if(name === data.users[0]) {
-
-				showMessage("youStartedChatWithNoMessages",data);
-			}
-			else {
-
-				showMessage("heStartedChatWithNoMessages",data);
-			}
-
-			chatNickname.text(friend);
-		}
-	});
+	// socket.on('startChat', function(data){
+	// 	console.log(data);
+	// 	showMessage("initializeChat");
+	// });
 
 	socket.on('leave',function(data){
 
@@ -158,14 +103,14 @@ $(function(){
 	});
 
 	socket.on('tooMany', function(data){
-
 		if(data.boolean && name.length === 0) {
-
 			showMessage('tooManyPeople');
 		}
 	});
 
 	socket.on('receive', function(data){
+
+		console.log(data);
 
 		showMessage('chatStarted');
 
@@ -175,9 +120,14 @@ $(function(){
 		}
 	});
 
+	// socket.on('isTyping', function(data){
+	// 	showMessage("isTyping")
+	// });
+
 	textarea.keypress(function(e){
 
-		// Submit the form on enter
+		// is typing
+		//socket.emit('isTyping');
 
 		if(e.which == 13) {
 			e.preventDefault();
@@ -188,10 +138,11 @@ $(function(){
 
 	chatForm.on('submit', function(e){
 
+		// console.log(e)
+		// console.log(name)
+
 		e.preventDefault();
-
 		// Create a new chat message and display it directly
-
 		showMessage("chatStarted");
 
 		if(textarea.val().trim().length) {
@@ -210,8 +161,52 @@ $(function(){
 
 	setInterval(function(){
 
+		// (function() {
+		//   var hidden = "hidden";
+
+		//   // Standards:
+		//   if (hidden in document)
+		//     document.addEventListener("visibilitychange", onchange);
+		//   else if ((hidden = "mozHidden") in document)
+		//     document.addEventListener("mozvisibilitychange", onchange);
+		//   else if ((hidden = "webkitHidden") in document)
+		//     document.addEventListener("webkitvisibilitychange", onchange);
+		//   else if ((hidden = "msHidden") in document)
+		//     document.addEventListener("msvisibilitychange", onchange);
+		//   // IE 9 and lower:
+		//   else if ("onfocusin" in document)
+		//     document.onfocusin = document.onfocusout = onchange;
+		//   // All others:
+		//   else
+		//     window.onpageshow = window.onpagehide
+		//     = window.onfocus = window.onblur = onchange;
+
+		//   function onchange (evt) {
+		//     var v = "visible", h = "hidden",
+		//         evtMap = {
+		//           focus:v, focusin:v, pageshow:v, blur:h, focusout:h, pagehide:h
+		//         };
+
+		//     evt = evt || window.event;
+		//     if (evt.type in evtMap)
+		//       document.body.className = evtMap[evt.type];
+		//     else
+		//       document.body.className = this[hidden] ? "hidden" : "visible";
+		//   }
+
+		//   // set the initial state (but only if browser supports the Page Visibility API)
+		//   if( document[hidden] !== undefined )
+		//     onchange({type: document[hidden] ? "blur" : "focus"});
+		// })();
+		
+		console.log(chats)
+
 		messageTimeSent.each(function(){
 			var each = moment($(this).data('time'));
+			// console.log(this)
+			// console.log(each)
+			// console.log(each.fromNow())
+			//console.log(each.fromNow().slice(0,1))
 			$(this).text(each.fromNow());
 		});
 
@@ -220,6 +215,9 @@ $(function(){
 	// Function that creates a new chat message
 
 	function createChatMessage(msg,user,imgg,now){
+
+		console.log(user)
+		//console.log(name)
 
 		var who = '';
 
@@ -231,7 +229,8 @@ $(function(){
 		}
 
 		var li = $(
-			'<li class=' + who + '>'+
+			// to delete messages that are over a certain time, assign now as id
+			'<li class=' + who +' id='+ now+ '>'+
 				'<div class="image">' +
 					'<img src=' + imgg + ' />' +
 					'<b></b>' +
@@ -248,10 +247,11 @@ $(function(){
 
 		messageTimeSent = $(".timesent");
 		messageTimeSent.last().text(now.fromNow());
+
 	}
 
 	function scrollToBottom(){
-		$("html, body").animate({ scrollTop: $(document).height()-$(window).height() },1000);
+		$("html, body").animate({ scrollTop: $(document).height()-$(window).height() },120);
 	}
 
 	function isValid(thatemail) {
@@ -265,7 +265,7 @@ $(function(){
 		if(status === "connected"){
 
 			section.children().css('display', 'none');
-			onConnect.fadeIn(1200);
+			onConnect.fadeIn(120);
 		}
 
 		else if(status === "inviteSomebody"){
@@ -273,26 +273,32 @@ $(function(){
 			// Set the invite link content
 			$("#link").text(window.location.href);
 
-			onConnect.fadeOut(1200, function(){
-				inviteSomebody.fadeIn(1200);
+			onConnect.fadeOut(120, function(){
+				inviteSomebody.fadeIn(120);
 			});
 		}
 
 		else if(status === "personinchat"){
 
 			onConnect.css("display", "none");
-			personInside.fadeIn(1200);
+			personInside.fadeIn(120);
 
 			chatNickname.text(data.user);
 			ownerImage.attr("src",data.avatar);
 		}
 
+		else if(status === "initializeChat"){
+			isTyping.css("display","none")
+			inviteSomebody.fadeOut(120);
+			footer.fadeIn(120);
+		}
+
 		else if(status === "youStartedChatWithNoMessages") {
 
-			left.fadeOut(1200, function() {
-				inviteSomebody.fadeOut(1200,function(){
-					noMessages.fadeIn(1200);
-					footer.fadeIn(1200);
+			left.fadeOut(120, function() {
+				inviteSomebody.fadeOut(120,function(){
+					noMessages.fadeIn(120);
+					footer.fadeIn(120);
 				});
 			});
 
@@ -302,9 +308,10 @@ $(function(){
 
 		else if(status === "heStartedChatWithNoMessages") {
 
-			personInside.fadeOut(1200,function(){
-				noMessages.fadeIn(1200);
-				footer.fadeIn(1200);
+			personInside.fadeOut(120,function(){
+				inviteSomebody.fadeOut(120);
+				noMessages.fadeIn(120);
+				footer.fadeIn(120);
 			});
 
 			friend = data.users[0];
@@ -324,13 +331,17 @@ $(function(){
 
 			section.children().css('display','none');
 			footer.css('display', 'none');
-			left.fadeIn(1200);
+			left.fadeIn(120);
 		}
 
 		else if(status === "tooManyPeople") {
 
 			section.children().css('display', 'none');
-			tooManyPeople.fadeIn(1200);
+			tooManyPeople.fadeIn(120);
+		}
+		else if(status === "isTyping") {
+			isTyping.fadeIn(10);
+			isTyping.fadeOut(10);
 		}
 	}
 

@@ -1,7 +1,7 @@
 {
-  "name": "OTR",
+  "name": "NodeChatSystem",
   "version": "0.0.1",
-  "description": "Off the Record",
+  "description": "Realtime chat system for Tutorialzine.com",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,8 @@
     "chat",
     "system"
   ],
+  "author": "Nikolay Anastasov",
+  "license": "MIT",
   "dependencies": {
     "ejs": "^1.0.0",
     "express": "^4.8.2",
