@@ -1,56 +1,78 @@
 <!DOCTYPE html>
-
-<!-- 	
-	This file is rendered by express.js, when the home url of the chat is opened in a browser.
-	It doesn't do much, except showing the create button for the chat.
- -->
-
-<html>
-
+<html lang="en">
 <head>
-
-	<title>Create a new chat room! | Tutorialzine Demo</title>
-
-	<link type="text/css" rel="stylesheet" href="css/stylesheet.css" />
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
-
-
+	<meta charset="UTF-8">
+	<title>Stealth</title>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="../css/stylesheet.css" />
 </head>
-
 <body>
 
-	<header class="homebanner">
-
-			<h1 class="homebannertext">
-				<a href="http://tutorialzine.com/2014/03/nodejs-private-webchat/" id="logo">Tutorial<span>zine</span></a>
-			</h1>
-
-	</header>
-
-	<section>
-
-		<div class="homesection">
-
-			<div class="node">
-				<img src="img/nodejslogo.png" alt="nodelogo" id="nodelogo"/>
-				<h2 id="chat">powered web chat</h2>
-			</div>
-
-			<a title="Create" href="/create" id="create">
-				<div id="createbutton">
-					<div id="little">Create a Private</div>
-					<div id="big">CHAT ROOM!</div>
-				</div>
-			</a>
-
-			<div class="tutorial">
-				<a title="Download the source code." href="http://tutorialzine.com/2014/03/nodejs-private-webchat/" id="tutorial">
-					or download a copy of the source code here
-				</a>
-			</div>
+<div class="container"><div class="row topcontent">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-4 col-md-offset-2">
+			<h1 class="appname"><img  class="icon" src="../img/s-icon.png">Stealth</h1>
+			<h2 class="subtitle">off-the-record conversations on slack</h2><br>
+			<a href="/create"><img src="../img/add-to-slack-button.png" width="165"></a>
 		</div>
 
-	</section>
+		<div class="col-md-5 col-md-offset-1">
+		<br><h3>How It Works</h3><br>
+		<h4>/stealth</h4>
+		<p>Type /stealth in any Slack room
+				and click on the link that appears.
+				A private room will be generated
+				where you can chat off-the-record.
+				</p>
+		</div>
+	</div>
+</div></div>
 
+<div class="container"><div class="bottomcontent">
+	<div class="col-md-12">
+	<br><h3 class="centertext">What is Stealth?</h3><br><br><br>
+	<div class="row">
+		<div class="col-md-4 features">
+			<div class="col-xs-2"><img src="../img/icon-1.png"></div>
+			<div class="col-xs-10"><h5>Leaves No Trace</h5>
+			<p>Once messages are read they
+				disappear forever. Nothing is stored.</p></div>
+		</div>
+		<div class="col-md-4 features">
+			<div class="col-xs-2"><img src="../img/icon-2.png"></div>
+			<div class="col-xs-10"><h5>Private</h5>
+			<p>We automatically limit the chat room to
+				only those who are supposed be there.</p></div>
+		</div>
+		<div class="col-md-4 features">
+			<div class="col-xs-2"><img src="../img/icon-3.png"></div>
+			<div class="col-xs-10"><h5>Encrypted</h5>
+			<p>All messages are encrypted
+				using 256-bit AES.</p></div>
+		</div>
+	</div><br><br>
+	<div class="row">
+		<div class="col-md-4 features">
+			<div class="col-xs-2"><img src="../img/icon-4.png"></div>
+			<div class="col-xs-10"><h5>Supports Groups</h5>
+			<p>Chat rooms can support up to 20 people.</p></div>
+		</div>
+		<div class="col-md-4 features">
+			<div class="col-xs-2"><img src="../img/icon-5.png"></div>
+			<div class="col-xs-10"><h5>Seamless</h5>
+			<p>Go from Slack to Stealth and back with just one click. </p></div>
+		</div>
+		<div class="col-md-4 features">
+			<div class="col-xs-2"><img src="../img/icon-6.png"></div>
+			<div class="col-xs-10"><h5>Platform Agnostic</h5>
+			<p>Works on any platform, any desktop or mobile device.</p></div>
+		</div>
+	</div>
+	</div></div></div>
+	<br><br>	<br><br>
+
+	<footer class="homefooter"><p>Copyright (C) 2016. Stealth. All Rights Reserved</p></footer>
 </body>
 </html>
+
