@@ -593,7 +593,8 @@ p {
 
 .homefooter p {
 	text-align: center;
-	color:#999;
+	color:#fff;
+	padding-top:15px;
 	font-size:12px;
 }
 
@@ -610,3 +611,30 @@ p {
 .bannertext {
 	font-size:16px;
 }
+
+.features {
+	margin-bottom: 20px;
+}
+@media screen and (max-width: 768px) {
+	.howtitle {
+		text-align: center;
+		clear:both;
+		padding-top:50px;
+	}
+	h4, h2, .appname, .topmain, .hiw p {
+		text-align: center;
+	}
+
+	.ctabutton img {
+		margin: auto;
+	}
+	.centertext {
+		margin-top: -40px;
+		margin-bottom: -30px;
+	}
+.icon {
+    margin-left: 0px;
+    margin-right: 20px;
+    margin-top: -10px;
+}
+
