@@ -527,9 +527,11 @@ h1, h2 {
 
 .topcontent {
 	margin-top:100px;
+	text-align: center;
 }
 
 .subtitle {
+	margin-top:50px;
 	font-size: 32px;
 	color: #b3b3b3;
 }
@@ -565,7 +567,7 @@ p {
 	font-size: 16px;
 }
 .bottomcontent {
-	margin-top:100px;
+	margin-top:40px;
 }
 
 .centertext {
@@ -619,15 +621,27 @@ p {
 	.howtitle {
 		text-align: center;
 		clear:both;
-		padding-top:50px;
+		padding-top:0px;
+	}
+	.bottomcontent {
+		padding-top:30px;
 	}
 	h4, h2, .appname, .topmain, .hiw p {
 		text-align: center;
+	}
+	.topheader {
+		padding-left:30px;
+		padding-right:30px;
+	}
+
+	.ctabtncontainer {
+		margin-top:50px;
 	}
 
 	.ctabutton img {
 		margin: auto;
 	}
+
 	.centertext {
 		margin-top: -40px;
 		margin-bottom: -30px;
@@ -637,4 +651,4 @@ p {
     margin-right: 20px;
     margin-top: -10px;
 }
-
+}
