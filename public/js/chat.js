@@ -7,7 +7,7 @@ $(function(){
 
 	// connect to the socket
 	var socket = io();
-	
+
 	// variables which hold the data for each person
 	var name = "",
 		email = "",
@@ -85,7 +85,7 @@ $(function(){
 
 	});
 
-	// Other useful 
+	// Other useful
 
 	// socket.on('startChat', function(data){
 	// 	console.log(data);
@@ -198,7 +198,7 @@ $(function(){
 		//   if( document[hidden] !== undefined )
 		//     onchange({type: document[hidden] ? "blur" : "focus"});
 		// })();
-		
+
 		console.log(chats)
 
 		messageTimeSent.each(function(){
@@ -232,11 +232,12 @@ $(function(){
 			// to delete messages that are over a certain time, assign now as id
 			'<li class=' + who +' id='+ now+ '>'+
 				'<div class="image">' +
-					'<img src=' + imgg + ' />' +
+					//'<img src=' + imgg + ' />' +
+					'<img src=/img/icon-1.png />' +
 					'<b></b>' +
-					'<i class="timesent" data-time=' + now + '></i> ' +
+					' ' +
 				'</div>' +
-				'<p></p>' +
+				'<i class="timesent" data-time=' + now + '></i><p></p>' +
 			'</li>');
 
 		// use the 'text' method to escape malicious user input

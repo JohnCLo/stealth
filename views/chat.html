@@ -11,6 +11,7 @@
 <head>
 
 	<title>Stealth</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	<link type="text/css" rel="stylesheet" href="../css/stylesheet.css" />
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>
@@ -20,19 +21,31 @@
 
 <body class="chat">
 
-	<header class="banner">
+
+
+	<sidebar class="sidebar">
 
 		<h1 class="bannertext">
-			Welcome to Stealth. All messages will disappear as soon as you leave the chatroom.
+			You’re in Stealth.<br><br>  Messages disappear in 60s.<br><br>  Chat room shuts down when everyone leaves.
 		</h1>
+		<h2 class="userheader">2 USERS JOINED</h2>
+		<ul class="users">
+		<li><i class="fa fa-circle"></i></i>john doe</li>
+		<li><i class="fa fa-circle"></i></i>john doe</li>
+		<li><i class="fa fa-circle"></i></i>john doe</li>
+		</ul><br><br>
+		<h2 class="userheader">WAITING FOR</h2>
+		<ul class="users">
+		<li class="inactive"><i class="fa fa-circle-o"></i></i>john doe</li>
+		<li class="inactive"><i class="fa fa-circle-o"></i></i>john doe</li>
+		<li class="inactive"><i class="fa fa-circle-o"></i></i>john doe</li>
+		</ul>
 
-	</header>
 
-
-	<section class="section">
+		</sidebar>
+	<section class="section chatbody">
 
 		<!-- These elements are displayed as white info cards in the middle of the screen -->
-
 		<div class="connected">
 
 			<img src="../img/unnamed.jpg" id="creatorImage" />
@@ -119,7 +132,6 @@
 
 	</section>
 
-	<footer>
 
 		<form id="chatform">
 			<div id="isTyping">Typing Typing Typing</div>
@@ -128,13 +140,25 @@
 
 		</form>
 
-	</footer>
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="../js/moment.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="../js/chat.js"></script>
+<script>
 
+$(window).resize(function() {
+                        $windowWidth = $(window).width();
+                        $('#message').width($windowWidth-325);
+                        });
+
+ $(document).ready(function() {
+        $windowWidth = $(window).width();
+        $('#message').width($windowWidth-325);
+
+  });
+
+  </script>
 </body>
 
 </html>
