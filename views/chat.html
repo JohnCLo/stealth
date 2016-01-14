@@ -11,132 +11,40 @@
 <head>
 
 	<title>Stealth</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link type="text/css" rel="stylesheet" href="../css/stylesheet.css" />
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>
-
-
 </head>
 
 <body class="chat">
-
-
-
-	<sidebar class="sidebar">
-
-		<h1 class="bannertext">
-			You’re in Stealth.<br><br>  Messages disappear in 60s.<br><br>  Chat room shuts down when everyone leaves.
-		</h1>
-		<h2 class="userheader">2 USERS JOINED</h2>
-		<ul class="users">
-		<li><i class="fa fa-circle"></i></i>john doe</li>
-		<li><i class="fa fa-circle"></i></i>john doe</li>
-		<li><i class="fa fa-circle"></i></i>john doe</li>
-		</ul><br><br>
-		<h2 class="userheader">WAITING FOR</h2>
-		<ul class="users">
-		<li class="inactive"><i class="fa fa-circle-o"></i></i>john doe</li>
-		<li class="inactive"><i class="fa fa-circle-o"></i></i>john doe</li>
-		<li class="inactive"><i class="fa fa-circle-o"></i></i>john doe</li>
-		</ul>
-
-
-		</sidebar>
+<section class="infobar">
+	<div class="col-xs-12 col-md-6 col-lg-6 smalltext text-center introtext	">You're in Stealth. Messages disappear in 60s. Chat room shuts down when everyone leaves.</div>
+	<div class="col-xs-12 col-md-3 col-lg-4 smalltext text-center">
+	<ul class="chatusers">
+	<li class="user1">User 1</li>
+	<li class="user2">User 2</li>
+	<li class="user3">User 3</li>
+	<li class="user4">User 4</li>
+	</ul>
+	</div>
+	<div class="col-xs-12 col-md-3 col-lg-2 smalltext text-center" style="padding-top:5px"><a class="btna" href="/"><span class="btn-leave">Leave Chat</span></a></div>
+</section>
 	<section class="section chatbody">
 
-		<!-- These elements are displayed as white info cards in the middle of the screen -->
-		<div class="connected">
-
-			<img src="../img/unnamed.jpg" id="creatorImage" />
-
-			<div class="infoConnected">
-				<h2>Who are you?</h2>
-				<br/>
-
-				<form class="loginForm">
-					<input type="text" id="yourName" placeholder="Your nick name" /><br/>
-					<input type="text" id="yourEmail" placeholder="Your email address" /><br/>
-					<input type="submit" id="yourEnter" value="ENTER" />
-				</form>
-
-			</div>
-
-		</div>
-
-		<div class="personinside">
-
-			<img src="../img/unnamed.jpg" id="ownerImage" />
-
-			<div class="infoInside">
-				<h2>Chat with <span class="nickname-chat"></span></h2>
-				<br/>
-
-				<form class="loginForm">
-					<input type="text" id="hisName" placeholder="Your nick name" /><br/>
-					<input type="text" id="hisEmail" placeholder="Your email address" /><br/>
-					<input type="submit" id="hisEnter" value="CHAT" />
-				</form>
-
-			</div>
-
-		</div>
-
-		<div class="invite-textfield">
-
-			<h2>Oops, there are no other people in this chat!</h2>
-			<h5>Invite a friend by sending them this URL</h5>
-
-			<div class="link">
-				<a title="Invite a friend" href="" id="link"></a>
-			</div>
-
-		</div>
-
-		<div class="left">
-
-			<img src="../img/unnamed.jpg" id="leftImage" />
-
-			<div class="info">
-				<h2><span class="nickname-left"></span> has left this chat.</h2>
-				<h5>Invite somebody else by sending them this page.</h5>
-			</div>
-
-		</div>
-
-		<div class="toomanypeople">
-
-			<h2>Oops, you can not join this chat!</h2>
-			<h5>There are already two people in it. Would you like to create a <a title="New Room" href="/create" id="room">new room</a>?</h5>
-
-		</div>
-
-		<div class="nomessages">
-
-			<img src="../img/unnamed.jpg" id="noMessagesImage" />
-
-			<div class="info">
-				<h2>You are chatting with <span class="nickname-chat"></span>.</h2>
-				<h5>Send them a message from the form below!</h5>
-			</div>
-
-		</div>
-
 		<div class="chatscreen">
-
 			<ul class="chats">
 				<!-- The chat messages will go here -->
 			</ul>
 
 		</div>
-
 	</section>
 
 
 		<form id="chatform">
-			<div id="isTyping">Typing Typing Typing</div>
+			<div id="isTyping">...</div>
 			<textarea id="message" placeholder="Write something..."></textarea>
-			<input type="submit" id="submit" value="SEND"/>
+			<input type="submit" id="submit" value="SEND" style="display:none;"/>
 
 		</form>
 
@@ -149,16 +57,17 @@
 
 $(window).resize(function() {
                         $windowWidth = $(window).width();
-                        $('#message').width($windowWidth-325);
+                        $('#message').width($windowWidth-50);
                         });
 
  $(document).ready(function() {
         $windowWidth = $(window).width();
-        $('#message').width($windowWidth-325);
+        $('#message').width($windowWidth-50);
 
   });
 
   </script>
+
 </body>
 
 </html>

@@ -409,6 +409,7 @@ body {
 .chatscreen {
 	padding:40px;    box-sizing: border-box;
 	background: #fff;
+	top: 40px;
 }
 
 /* ------------ Footer styles ------------ */
@@ -427,6 +428,7 @@ footer {
 	background-color: white;
 }
 
+
 #message {
     background: #fff;
     font-size: 15px;
@@ -441,15 +443,15 @@ footer {
     outline: 0;
     position: absolute;
     bottom: 0;
-    height: 20px;
-    padding: 9px 40px 9px 8px;
+    height: 46px;
+    padding: 15px;
     resize: none!important;
     -webkit-transition: none;
     -moz-transition: none;
     transition: none;
     border-radius: 6px;
     margin:10px;
-    left:250px;
+    left:0px;
 }
 
 #submit {
@@ -505,7 +507,8 @@ footer {
 .chatscreen{
 	display:none;
 	width:100%;
-	margin: 0 auto 200px;
+	top: 40px;
+	margin: 40px auto 40px;
 	overflow:hidden;
 }
 
@@ -648,44 +651,16 @@ p {
 }
 .chatbody {
 	position: absolute;
-	top:0;
-	left:250px;
+	top:40px;
+	left:0px;
 	height: 100%;
 	right: 0;
 	background: #fff;
 }
 .chatform, #message {
 	position: fixed !important;
-	left:250px;
+	left:0px;
 	bottom:0px;
-}
-.sidebar {
-	position: fixed;
-	top:0;
-	left:0;
-	height: 100%;
-	width:250px;
-	background-color: #4D394B;
-}
-
-.sidebar ul.users li {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    height: 1.5rem;
-    margin-right: 1px;
-    position: relative;
-    clear: both;
-    overflow: hidden;
-    color: #ab9ba9;
-    display: block;
-    height: 1.7rem;
-    padding: 0 .5rem 0 1rem;
-    border-top-right-radius: .25rem;
-    border-bottom-right-radius: .25rem;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    background-clip: padding-box;
-    text-decoration: none!important;
 }
 
 .userheader {
@@ -711,4 +686,77 @@ p {
 
 .inactive .fa {
 	color: #ab9ba9;
+}
+.infobar {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	z-index:999;
+	height: auto;
+	width: 100%;
+	border-bottom: 1px solid #eee;
+	background-color: #efefef;
+	padding:10px;
+}
+.smalltext {
+	padding:0px;
+	font-size: 14px;
+	color:#999;
+}
+.introtext {
+	padding-top: 5px;
+}
+
+.chatusers {
+	margin-right: 20px;
+	margin: 0px;
+}
+
+.chatusers p{
+	list-style: none;
+	display: inline;
+	padding-top:4px;
+}
+
+.chatusers li{
+	list-style: none;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	text-indent: -99999px;
+	background-color: red;
+	border-radius: 50px;
+	margin-top:-4px;
+	margin-left: 4px;
+}
+
+.btn-leave {
+	margin-top:5px;
+	background-color: #666;
+	padding:7px 10px;
+	border-radius: 4px;
+	color: #fff;
+}
+.btn-leave:hover {
+	background-color: #444;
+}
+.btna, .btna:hover, .btna:active {
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+@media screen and (max-width: 991px) {
+	.infobar div {
+		margin-bottom: 10px;
+	}
+	.chatscreen{
+	display:none;
+	width:100%;
+	top: 40px;
+	margin: 100px auto 40px;
+	overflow:hidden;
+}
 }
