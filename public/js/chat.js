@@ -3,7 +3,8 @@
 $(function(){
 
 	// getting the id of the room from the url
-	var id = Number(window.location.pathname.match(/\/chat\/(\d+)$/)[1]);
+	var id = window.location.pathname.split("/").pop();
+	//var id = Number(window.location.pathname.match(/\/chat\/(\d+)$/)[1]);
 
 	// connect to the socket
 	var socket = io();
@@ -69,7 +70,7 @@ $(function(){
 			showMessage("initializeChat");
 			// randomly select a profile
 			name = profiles[Math.floor(Math.random() * profiles.length)]+' '+Math.round((Math.random() * 1000000));
-			emial = Math.round((Math.random() * 1000000))
+			email = Math.round((Math.random() * 1000000))
 			// call the server-side function 'login' and send user's parameters
 			socket.emit('login', {user: name, avatar: email, id: id});
 
@@ -93,10 +94,16 @@ $(function(){
 	// });
 
 	socket.on('leave',function(data){
-
+		// if only one person remaining
 		if(data.boolean && id==data.room){
+			console.log(data.user+" left")
+			//showMessage("somebodyLeft", data);
+			//chats.empty();
+		}
 
-			showMessage("somebodyLeft", data);
+		if(data.boolean && id==data.room && data.remaining == 1){
+
+			showMessage("everyoneLeft", data);
 			chats.empty();
 		}
 
@@ -199,13 +206,17 @@ $(function(){
 		//     onchange({type: document[hidden] ? "blur" : "focus"});
 		// })();
 		
-		console.log(chats)
+		//console.log(chats)
 
 		messageTimeSent.each(function(){
 			var each = moment($(this).data('time'));
-			// console.log(this)
-			// console.log(each)
-			// console.log(each.fromNow())
+			// Delete comments that are over a minute old
+			var timeInMs = Date.now();
+			var timeElapsed = timeInMs - each._i
+			if(timeElapsed > 60000){ // 1 minute
+				$(this).parent().parent().remove()
+			}
+			//console.log(each.fromNow())
 			//console.log(each.fromNow().slice(0,1))
 			$(this).text(each.fromNow());
 		});
@@ -332,6 +343,21 @@ $(function(){
 			section.children().css('display','none');
 			footer.css('display', 'none');
 			left.fadeIn(120);
+		}
+
+		else if(status === "everyoneLeft"){
+
+			//leftImage.attr("src",data.avatar);
+			leftNickname.text("Everyone");
+
+			section.children().css('display','none');
+			footer.css('display', 'none');
+			left.fadeIn(120);
+
+			// redirect to homepage
+			setTimeout(function() {
+			  window.location.href = "/";
+			}, 5000);
 		}
 
 		else if(status === "tooManyPeople") {

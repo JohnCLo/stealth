@@ -5,6 +5,7 @@
 // Use the gravatar module, to turn email addresses into avatar images:
 
 var gravatar = require('gravatar');
+var uuid = require('node-uuid');
 
 // Export a function, so that we can pass 
 // the app and io instances from the app.js file:
@@ -20,7 +21,9 @@ module.exports = function(app,io){
 	app.get('/create', function(req,res){
 
 		// Generate unique id for the room
-		var id = Math.round((Math.random() * 1000000));
+		// http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript?rq=1
+		var id = uuid.v1();
+		//var id = Math.round((Math.random() * 1000000));
 
 		// Redirect to the random room
 		res.redirect('/chat/'+id);
@@ -131,11 +134,17 @@ module.exports = function(app,io){
 			// Notify the other person in the chat room
 			// that his partner has left
 
+			// console.log(this.room);
+			var number = findClientsSocket(io,this.room).length
+			//var room = findClientsSocket(io, this.room.room);
+			//console.log(room);
+
 			socket.broadcast.to(this.room).emit('leave', {
 				boolean: true,
 				room: this.room,
 				user: this.username,
-				avatar: this.avatar
+				avatar: this.avatar,
+				remaining: number
 			});
 
 			// leave the room
